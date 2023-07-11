@@ -1,6 +1,6 @@
-# team_page
+# Team Fourfect
 
-A new Flutter project.
+팀 소개 페이지
 
 ## Getting Started
 
@@ -14,3 +14,10 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## 페이지 구성
+
+- 팀 소개 페이지
+- 개인 소개 페이지
+- 방명록 리스트 페이지
+- 방명록 작성 페이지

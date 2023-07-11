@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:team_page/Jina_personal.dart';
 import 'package:team_page/choonghwan_personal.dart';
 import 'package:team_page/daeul_personal.dart';
 import 'package:team_page/sohyun_personal.dart';
 import 'package:team_page/visitor_memo_list.dart';
 import 'package:team_page/yongjun_personal.dart';
+=======
+import 'package:provider/provider.dart';
+import 'package:team_page/visitor_memo_list.dart';
+
+import 'guestbook_service.dart';
+import 'team_page.dart';
+>>>>>>> 953f1706c97b9f2058700677278027f6d53d01c1
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => BookService()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: VisitorMemoList(),
+<<<<<<< HEAD
     );
   }
 }
@@ -86,6 +102,8 @@ class TeamPage extends StatelessWidget {
               child: Text("김소현")),
         ],
       ),
+=======
+>>>>>>> 953f1706c97b9f2058700677278027f6d53d01c1
     );
   }
 }
