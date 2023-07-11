@@ -3,6 +3,7 @@ import 'package:team_page/Jina_personal.dart';
 import 'package:team_page/choonghwan_personal.dart';
 import 'package:team_page/daeul_personal.dart';
 import 'package:team_page/sohyun_personal.dart';
+import 'package:team_page/visitor_memo_list.dart';
 import 'package:team_page/yongjun_personal.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TeamPage(),
+      home: VisitorMemoList(),
     );
   }
 }
