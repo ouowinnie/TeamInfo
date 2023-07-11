@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
       home: VisitorMemoList(),
 <<<<<<< HEAD
     );
@@ -104,6 +105,9 @@ class TeamPage extends StatelessWidget {
       ),
 =======
 >>>>>>> 953f1706c97b9f2058700677278027f6d53d01c1
+=======
+      home: TeamPage(),
+>>>>>>> e3fd2281145c89d5d114e7020fc8b51338d810de
     );
   }
 }

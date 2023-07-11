@@ -44,4 +44,15 @@ class BookService extends ChangeNotifier {
     notifyListeners();
 >>>>>>> 953f1706c97b9f2058700677278027f6d53d01c1
   }
+
+  updateBook({required int index, required String content}) {
+    Book book = bookList[index];
+    book.content = content;
+    notifyListeners();
+  }
+
+  deleteMemo({required int index}) {
+    bookList.removeAt(index);
+    notifyListeners();
+  }
 }

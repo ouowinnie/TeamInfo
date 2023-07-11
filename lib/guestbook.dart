@@ -90,7 +90,33 @@ class CreateMemoPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // 삭제 버튼 클릭시
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("정말로 삭제하시겠습니까?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text("취소"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          bookService.deleteMemo(index: index);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "확인",
+                          style: TextStyle(color: Colors.pink),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             icon: Icon(Icons.delete),
           )
@@ -110,7 +136,9 @@ class CreateMemoPage extends StatelessWidget {
             maxLines: null,
             expands: true,
             keyboardType: TextInputType.multiline,
-            onChanged: (value) {}),
+            onChanged: (value) {
+              bookService.updateBook(index: index, content: value);
+            }),
       ),
     );
   }
