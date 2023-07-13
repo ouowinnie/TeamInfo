@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  flutter_native_splash: ^2.2.4
   flutter:
     sdk: flutter
 
@@ -36,6 +37,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
+  shared_preferences: ^2.2.0
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +58,11 @@ dev_dependencies:
 flutter:
   assets:
     - assets/IMG_7607.png
+    - assets/choonghwan_personal_img.jpg
+    - assets/daeul_personal_img.jpg
+    - assets/jina_personal_img.jpeg
+    - assets/sohyun_personal_img.jpg
+    - assets/logo_fourfect.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

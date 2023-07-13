@@ -7,7 +7,10 @@ import 'package:provider/provider.dart';
 >>>>>>> 953f1706c97b9f2058700677278027f6d53d01c1
 
 import 'guestbook_service.dart';
+import 'themes/colors.dart';
+import 'themes/textStyles.dart';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 class createMemoPage extends StatelessWidget {
   createMemoPage({super.key, required this.index, required this.visitList});
@@ -17,11 +20,38 @@ class createMemoPage extends StatelessWidget {
 =======
 class CreateMemoPage extends StatelessWidget {
   CreateMemoPage({super.key, required this.index});
+=======
+class CreateMemoPage extends StatefulWidget {
+  CreateMemoPage({super.key, required this.index, required this.isModify});
+>>>>>>> 1871534931754f2a11210222591d51fda6ce9981
 
   final int index;
+  final bool isModify;
 
+<<<<<<< HEAD
 >>>>>>> 953f1706c97b9f2058700677278027f6d53d01c1
+=======
+  @override
+  State<CreateMemoPage> createState() => _CreateMemoPageState();
+}
+
+class _CreateMemoPageState extends State<CreateMemoPage> {
+>>>>>>> 1871534931754f2a11210222591d51fda6ce9981
   TextEditingController contentController = TextEditingController();
+
+  TextEditingController substanceController = TextEditingController();
+
+  TextEditingController nameController = TextEditingController();
+
+  TextEditingController keyController = TextEditingController();
+
+  String contentValue = "";
+
+  String substanceValue = "";
+
+  String nameValue = "";
+
+  String keyValue = "";
 
   @override
   Widget build(BuildContext context) {
@@ -81,64 +111,127 @@ class CreateMemoPage extends StatelessWidget {
               label: Text("저장하기"))
 =======
     BookService bookService = context.read<BookService>();
-    Book book = bookService.bookList[index];
+    Book book = bookService.bookList[widget.index];
 
     contentController.text = book.content;
+    substanceController.text = book.substance;
+    nameController.text = book.name;
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorStyles.kAppBar,
         actions: [
-          IconButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text("정말로 삭제하시겠습니까?"),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text("취소"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          bookService.deleteMemo(index: index);
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          "확인",
-                          style: TextStyle(color: Colors.pink),
-                        ),
-                      ),
-                    ],
+          TextButton(
+              onPressed: () {
+                String contentS = contentController.text;
+                String substanceS = substanceController.text;
+                String nameS = nameController.text;
+                String keyS = keyController.text;
+
+                if (contentS.isNotEmpty &&
+                    substanceS.isNotEmpty &&
+                    nameS.isNotEmpty &&
+                    keyS.isNotEmpty) {
+                  bookService.updateBook(
+                      index: widget.index,
+                      content: contentS,
+                      substance: substanceS,
+                      name: nameS,
+                      key: keyS);
+                  Navigator.pop(context);
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("모든 내용을 입력해야 저장, 수정이 가능합니다."),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("확인"),
+                          ),
+                        ],
+                      );
+                    },
                   );
+<<<<<<< HEAD
                 },
               );
             },
             icon: Icon(Icons.delete),
           )
 >>>>>>> 953f1706c97b9f2058700677278027f6d53d01c1
+=======
+                }
+              },
+              child: Text(
+                widget.isModify ? "수정" : "저장",
+                style: TextStyles.kWhiteTextStyle,
+              ))
+>>>>>>> 1871534931754f2a11210222591d51fda6ce9981
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: TextField(
-            controller: contentController,
-            decoration: const InputDecoration(
-                hintText: "방명록을 입력하세요",
-                border: InputBorder.none,
-                filled: true,
-                fillColor: Color(0xffD9D9D9)),
-            autofocus: true,
-            maxLines: null,
-            expands: true,
-            keyboardType: TextInputType.multiline,
-            onChanged: (value) {
-              bookService.updateBook(index: index, content: value);
-            }),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              TextField(
+                  controller: contentController,
+                  decoration: const InputDecoration(
+                      hintText: "제목을 입력하세요",
+                      border: InputBorder.none,
+                      filled: true,
+                      fillColor: ColorStyles.kLightGrey),
+                  autofocus: false,
+                  maxLines: 1,
+                  expands: false,
+                  keyboardType: TextInputType.multiline,
+                  onChanged: (value) {}),
+              SizedBox(height: 20),
+              TextField(
+                  controller: substanceController,
+                  decoration: const InputDecoration(
+                      hintText: "내용을 입력하세요",
+                      border: InputBorder.none,
+                      filled: true,
+                      fillColor: ColorStyles.kLightGrey),
+                  autofocus: false,
+                  maxLines: 10,
+                  expands: false,
+                  keyboardType: TextInputType.multiline,
+                  onChanged: (value) {}),
+              SizedBox(height: 20),
+              TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                      hintText: "이름",
+                      border: InputBorder.none,
+                      filled: true,
+                      fillColor: ColorStyles.kLightGrey),
+                  autofocus: false,
+                  maxLines: 1,
+                  expands: false,
+                  keyboardType: TextInputType.multiline,
+                  onChanged: (value) {}),
+              SizedBox(height: 20),
+              TextField(
+                  controller: keyController,
+                  decoration: const InputDecoration(
+                      hintText: "비밀번호",
+                      border: InputBorder.none,
+                      filled: true,
+                      fillColor: ColorStyles.kLightGrey),
+                  autofocus: false,
+                  maxLines: 1,
+                  expands: false,
+                  keyboardType: TextInputType.multiline,
+                  onChanged: (value) {}),
+            ],
+          ),
+        ),
       ),
     );
   }

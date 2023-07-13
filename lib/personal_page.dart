@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+import 'themes/colors.dart';
+import 'themes/textStyles.dart';
 
 class PersonalPage extends StatelessWidget {
   final String name;
@@ -7,6 +11,13 @@ class PersonalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, String> images = {
+      "이충환": "assets/choonghwan_personal_img.jpg",
+      "이다을": "assets/daeul_personal_img.jpg",
+      "김진아": "assets/jina_personal_img.jpeg",
+      "이용준": "assets/IMG_7607.png",
+      "김소현": "assets/sohyun_personal_img.jpg",
+    };
     List<Map<String, dynamic>> personalList = [
       {
         "question": "- 나에 대한 설명 및 MBTI",
@@ -18,7 +29,7 @@ class PersonalPage extends StatelessWidget {
         "이용준":
             "저의 MBTI는 'INTJ'입니다 사람들이랑 어울리는 걸 좋아해서 E라고 생각한 적 있는데 낯 가림이 심한 걸 보니 I가 맞는 것 같아요",
         "김소현":
-            "제 MBTI는 ISFJ입니다.\n학부생 시절만 해도 ESFJ였는데 입사를 하고서 성격이 바뀌었습니다. 이후로도 꽤 여러번 재검사를 해봤는데 결국 E로 돌아오지 못했답니다.. 검사를 해보면 90% 이상의 극S와 극J가 나오고 E와I, T와F는 4:6정도 비율이 나옵니다. ISFJ가 I중에 가장 E이고, F중에 가장 T라고 하던데 어느정도는 일치한다고 느끼는 것 같습니다.",
+            "학부생 시절만 해도 ESFJ였는데 입사를 하고서 ISFJ로 바뀌었습니다. 검사를 해보면 90% 이상의 극S와 극J가 나오고 E와I, T와F는 4:6정도 비율이 나옵니다. ISFJ가 I중에 가장 E이고, F중에 가장 T라고 하던데 어느정도는 일치한다고 느끼는 것 같습니다.",
       },
       {
         "question": "- 객관적인 장점",
@@ -43,55 +54,110 @@ class PersonalPage extends StatelessWidget {
       },
       {
         "question": "- 개인 블로그 주소",
-        "이충환": "choongplog.tistory.com",
-        "이다을": "아직없음",
-        "김진아": "https://velog.io/@jxxn.a 입니다.",
-        "이용준": "개인 블로그는 운영하지 않습니다.. SNS도 안해요",
+        "이충환": "https://choongplog.tistory.com/",
+        "이다을": "https://velog.io/@ouowinnie",
+        "김진아": "https://velog.io/@jxxn_a",
+        "이용준": "-",
         "김소현": "https://sinw212.tistory.com/",
       },
     ];
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorStyles.kAppBar,
         title: Text(
           "개인 프로필 ($name)",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyles.kBoldTextStyle,
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 8.0),
-        child: ListView.builder(
-          itemCount: personalList.length,
-          itemBuilder: (context, index) {
-            return Container(
-              width: double.infinity,
-              color: Color(0xffeeeeee),
-              margin: EdgeInsets.fromLTRB(8, 4, 8, 8),
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                    child: Text(
-                      personalList[index]['question'],
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    personalList[index][name],
-                  ),
-                ],
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100.0),
+                child: Image.asset(
+                  images[name]!,
+                  width: 200,
+                  fit: BoxFit.cover,
+                ),
               ),
-            );
-          },
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: personalList.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: double.infinity,
+                    color: ColorStyles.kLightGrey,
+                    margin: EdgeInsets.fromLTRB(8, 4, 8, 8),
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                          child: Text(
+                            personalList[index]['question'],
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            if (personalList[index][name].contains("https")) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => WebViewPage(
+                                    url: personalList[index][name],
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          child: (personalList[index][name].contains("https"))
+                              ? Text(
+                                  personalList[index][name],
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                )
+                              : Text(
+                                  personalList[index][name],
+                                ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+}
+
+class WebViewPage extends StatelessWidget {
+  WebViewPage({super.key, required this.url});
+
+  String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorStyles.kAppBar,
+        title: Text(url),
+      ),
+      body: WebView(initialUrl: url),
     );
   }
 }
