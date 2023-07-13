@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:team_page/guestbook_service.dart';
-
-import 'guestbook.dart';
+import 'package:team_page/guestbook.dart';
 
 class VisitorMemoList extends StatefulWidget {
   const VisitorMemoList({super.key});
@@ -40,8 +39,9 @@ class _VisitorMemoListState extends State<VisitorMemoList> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => CreateMemoPage(
+                              builder: (_) => createMemoPage(
                                 index: index,
+                                visitList: [],
                               ),
                             ),
                           );
@@ -59,8 +59,9 @@ class _VisitorMemoListState extends State<VisitorMemoList> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => CreateMemoPage(
+                builder: (_) => createMemoPage(
                   index: bookService.bookList.length - 1,
+                  visitList: [],
                 ),
               ),
             );
