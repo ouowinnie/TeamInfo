@@ -1,37 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-class Guestbook {
-  Guestbook({
-    required this.content,
-  });
-
-  String content;
-
-  Map toJson() {
-    return {'content': content};
-  }
-
-  factory Guestbook.fromJson(json) {
-    return Guestbook(content: json['content']);
-  }
-}
-
-class GuestbookService extends ChangeNotifier {
-  List<Guestbook> visitlist = [Guestbook(content: "테스트")];
-  updateMemoTitle({required int index, required String content}) {}
-  updateMemoContent({required int index, required String content}) {}
-  creatMemoTitle({required String content}) {
-    Guestbook guestbook = Guestbook(content: content);
-    visitlist.add(guestbook);
-=======
-=======
 import 'main.dart';
 
->>>>>>> 1871534931754f2a11210222591d51fda6ce9981
 class Book {
   Book(
       {required this.content,
@@ -42,7 +12,6 @@ class Book {
   String substance;
   String name;
   String key;
-
   Map toJson() {
     return {
       'content': content,
@@ -68,7 +37,6 @@ class BookService extends ChangeNotifier {
   List<Book> bookList = [
     Book(content: '방명록', substance: 'ㅇㅇㅇ', name: '충환', key: '11111'),
   ];
-
   createBook(
       {required String content,
       required String substance,
@@ -78,11 +46,7 @@ class BookService extends ChangeNotifier {
         Book(content: content, substance: substance, name: name, key: key);
     bookList.add(book);
     notifyListeners();
-<<<<<<< HEAD
->>>>>>> 953f1706c97b9f2058700677278027f6d53d01c1
-=======
     saveBookList();
->>>>>>> 1871534931754f2a11210222591d51fda6ce9981
   }
 
   updateBook(
