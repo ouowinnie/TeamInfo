@@ -1,38 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'guestbook_service.dart';
 
 class ViewGuestBook extends StatelessWidget {
   ViewGuestBook({super.key, required this.index});
-
   final int index;
-
   TextEditingController contentController = TextEditingController();
-
   TextEditingController substanceController = TextEditingController();
-
   TextEditingController nameController = TextEditingController();
-
   TextEditingController keyController = TextEditingController();
-
   String contentValue = "";
-
   String substanceValue = "";
-
   String nameValue = "";
-
   String keyValue = "";
-
   @override
   Widget build(BuildContext context) {
     BookService bookService = context.read<BookService>();
     Book book = bookService.bookList[index];
-
     contentController.text = book.content;
     substanceController.text = book.substance;
     nameController.text = book.name;
-
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

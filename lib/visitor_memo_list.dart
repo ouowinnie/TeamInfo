@@ -2,31 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:team_page/guestbook_service.dart';
-<<<<<<< HEAD
-import 'package:team_page/guestbook.dart';
-=======
 import 'package:team_page/guestbook_view.dart';
-
 import 'guestbook.dart';
 import 'themes/colors.dart';
 import 'themes/textStyles.dart';
->>>>>>> 1871534931754f2a11210222591d51fda6ce9981
 
 class VisitorMemoList extends StatefulWidget {
   const VisitorMemoList({super.key});
-
   @override
   State<VisitorMemoList> createState() => _VisitorMemoListState();
 }
 
 class _VisitorMemoListState extends State<VisitorMemoList> {
   TextEditingController keyController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Consumer<BookService>(builder: (context, bookService, child) {
       List<Book> bookList = bookService.bookList;
-
       return Scaffold(
         appBar: AppBar(
           backgroundColor: ColorStyles.kAppBar,
@@ -50,13 +42,8 @@ class _VisitorMemoListState extends State<VisitorMemoList> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-<<<<<<< HEAD
-                              builder: (_) => createMemoPage(
-=======
                               builder: (_) => ViewGuestBook(
->>>>>>> 1871534931754f2a11210222591d51fda6ce9981
                                 index: index,
-                                visitList: [],
                               ),
                             ),
                           );
@@ -173,13 +160,9 @@ class _VisitorMemoListState extends State<VisitorMemoList> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => createMemoPage(
+                builder: (_) => CreateMemoPage(
                   index: bookService.bookList.length - 1,
-<<<<<<< HEAD
-                  visitList: [],
-=======
                   isModify: false,
->>>>>>> 1871534931754f2a11210222591d51fda6ce9981
                 ),
               ),
             );
